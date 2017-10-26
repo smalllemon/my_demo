@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>random number</title>
+	<style>
+	body{
+		text-align:center;
+		background-color:rgba(0,0,0,0.8);
+	}
+	#btn{
+		width:150px;
+		height:40px;
+		background-color:pink;
+		border-radius:8px;
+		border:none;
+		cursor:pointer;
+		margin-top:30px;
+		font-size:15px;
+		color:white;
+	}
+	#box{
+	 	list-style:none;
+	 	width:400px;
+	 	height: 400px;
+	 	border:1px solid #ccc;
+	 	margin:50px auto;
+	}
+	.show{
+	 	width:85px;
+	 	height:40px;
+	 	border:1px solid #ccc;
+	 	float: left;
+	 	font-size:15px;
+	 	color:white;
+	 	font-family:宋体;
+	 	margin:7px;
+	 	text-align:center;
+	 	line-height: 35px;
+	 	border-radius:10px;
+	 	font-weight: bolder;
+	 	margin-left:2px;
+	}
+	</style>
+</head>
+<body>
+    <button id='btn'>点击触发</button>
+	<ul id="box">
+	</ul>
+</body>
+<script type="text/javascript">
+
+/*
+
+   翻出来很久之前写的js，当时的JS只是停留在比较浅的层次，完全没有架构，
+   前几天仔细研究了张容铭编写的js设计模式，重构了之前的代码。
+   
+*/
+
+
+// //随机点名器 
+var arr=["邵乐乐","石美玲","李蓉","何欢",'陈明',"石美玲","张雪","李亚宁","王瑞","张阳","刘宁","刘露","崔展","刘歌",'韦秦康','雷欢欣','邵乐乐','张红红','李甫','都跳','王奇'];
+var time=null,flag=true;
+var arr2=[];
+var btn=document.getElementById('btn');
+	for(var i=0;i<arr.length;i++){
+       var box=document.getElementById('box');
+	   var lis=document.createElement("li");
+	   box.appendChild(lis);
+	   lis.setAttribute('class','show');
+	   lis.innerHTML=arr[i];
+	}
+	  var li=box.getElementsByTagName('li');
+	  btn.onclick=function(){
+		if(flag){
+			btn.innerHTML="停止随机";
+			flag=false;
+	    	time=setInterval(function(){
+	    		var x=Math.ceil(Math.random()*arr.length-1);
+		        li[x].style.backgroundColor="#431958"; 
+		        li[x].style.color="white"; 
+		        arr2.push(x);
+	    		for(var i=0;i<li.length;i++){
+		    		if(li[i]!=li[x]){
+	                 li[i].style.backgroundColor="";  
+	                 li[i].style.color="white";  
+	                }
+	    	    }      
+		    },200);
+		    //选中设置其他的颜色
+		    // box.removeChild(li[arr2.pop()]);
+		    li[arr2.pop()].style.backgroundColor = "pink";
+	    }else if(flag==false){
+	    	btn.innerHTML="点击触发";
+	        flag=true;
+			clearInterval(time);
+	    }
+	}
+	btn.onmousedown=function(ev){
+	     var e=ev||window.event;
+	     if(e.preventDefault){
+			e.preventDefault();
+	     }else{
+	     	e.returnValue=false;
+	     }
+	}  
+
+
+// 函数重新构造
+var initData = {
+	time : null,
+	flag : true,
+    saveNumber : [],
+    arrItem : ["邵乐乐","石美玲","李蓉","何欢",'陈明',"石美玲","张雪","李亚宁","王瑞","张阳","刘宁","刘露","崔展","刘歌",'韦秦康','雷欢欣','邵乐乐','张红红','李甫','都跳','王奇'],
+    boxContainer :document.getElementById('box'),
+	liList : "",
+	randomNumber :"",
+	liElement : "",
+	Element:"",
+	btnClick  : document.getElementById('btn'),
+	
+};
+
+var  pageAction = {
+
+	init: function(){
+       pageAction.createElement();
+       pageAction.choseList();
+	},
+    createElement : function (){
+		for(var i = 0;i < initData.arrItem.length ;i++){
+	 		   initData.liList = document.createElement("li");
+			   initData.boxContainer.appendChild(initData.liList);
+			   initData.liList.setAttribute('class','show');
+			   initData.liList.innerHTML=initData.arrItem[i];
+		}
+    },
+    choseList :function (){
+    	initData.btnClick.onclick = function(){
+			if(initData.flag){
+				initData.btnClick.innerHTML="停止随机";
+				initData.flag = false;
+		    	initData.time = setInterval(function(){
+		    		initData.liElement = initData.boxContainer.getElementsByTagName('li');
+		    		initData.randomNumber = Math.ceil(Math.random()*initData.arrItem.length-1);
+			        initData.liElement[initData.randomNumber].style.backgroundColor="#431958"; 
+			        initData.liElement[initData.randomNumber].style.color="white"; 
+			        initData.saveNumber.push(initData.randomNumber);
+		    		for(var i = 0;i <initData.liElement.length;i++){
+			    		if(initData.liElement[i]!=initData.liElement[initData.randomNumber]){
+		                 initData.liElement[i].style.backgroundColor="";  
+		                 initData.liElement[i].style.color="white";  
+		                }
+		    	    }      
+			    },200);
+			    initData.boxContainer.removeChild(initData.liElement[initData.saveNumber.pop()]);
+		    }else if(initData.flag == false){
+		    	initData.btnClick.innerHTML="点击触发";
+		        initData.flag = true;
+				clearInterval(initData.time);
+		    }
+		}
+    },
+    preventThing:function(){
+		initData.btnClick.onmousedown=function(ev){
+		    initData.Element =ev||window.event;
+		     if(initData.Element.preventDefault){
+				initData.Element.preventDefault();
+		     }else{
+		     	initData.Element.returnValue=false;
+		     }
+		}
+    },
+
+};
+
+pageAction.init();
+
+
+
+</script>
+</html>
