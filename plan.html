@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js实例</title>
+	<style>
+	html,body{
+		padding:0;
+		margin:0;
+	}
+	.first-page{
+		width:400px;
+		height:600px;
+		background-color: skyblue;
+		margin:0px auto;
+		overflow: hidden;
+	}
+	.second-page{
+		width:390px;
+		height:580px;
+		background-color: #ccc;
+		margin:-13px auto;
+	}
+	.second-page p{
+       width:100%;
+       height: 40px;
+       line-height: 55px;
+       text-align: center;
+       color: white;
+       font-size: 21px;
+       font-weight: bolder;
+	}
+	.container{
+		width:340px;
+		height:360px;
+		overflow: hidden;
+		list-style: none;
+	}
+	.container li{
+		width:100px;
+		height:80px;
+		background-color: black;
+		float: left;
+		margin:10px 3px 0px 3px;
+		text-align: center;
+        color:white;
+        font-family: "微软雅黑";
+        font-size:18px;
+        text-align: center;
+        line-height: 80px;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+    .container .hover{
+    	width:98px;
+		height:78px;
+    	background-color: white;
+    	border:1px solid black;
+    	color:red;
+	    font-family: "微软雅黑";
+	    font-size:18px;
+	    text-align: center;
+	    line-height: 80px;
+	    font-weight:bolder ;
+    }
+    .show-details{
+    	width:315px;
+    	height:80px;
+    	background-color: white;
+    	margin:0px auto;
+    	text-align: center;
+    	font-family: "微软雅黑" ;
+    	font-size: 18px;
+    	color:black;
+    	line-height:40px;
+    }
+	</style>
+</head>
+<body>
+	<div class="first-page">
+        <div class="second-page">
+            <p>任翻一个皆有惊喜等你哦 ~~~~</p>
+			<ol class="container">
+				<li>
+					1
+					JAN
+				</li>
+				<li>
+					2
+					FEB
+				</li>
+				<li>
+					3
+					MAR
+				</li>
+				<li>
+					4
+					APR
+				</li>
+				<li>
+					5
+					MAY
+				</li>
+				<li>
+					6
+					JUN
+				</li>
+				<li>
+					7
+					JUL
+				</li>
+				<li>
+					8
+					AUG
+				</li>
+				<li>
+					9
+					SEP
+				</li>
+				<li>
+					10
+					OCT
+				</li>
+				<li>
+					11
+					NOV
+				</li>
+				<li>
+					12
+					DEC
+				</li>
+			</ol>
+			<!--展示具体的详细情况 -->
+			<div class="show-details">
+				
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript"> 
+	//tab切换
+    var arr_months = ["1月活动","2月活动","3月活动","4月活动","5月活动","6月活动","7月活动","8月活动","9月活动","10月活动","11月活动","12月活动"];
+    var arr_activity =["js权威教材学习","jQuery教材学习计划","HTML5学习计划","css3学习计划","JS设计模式学习计划","Angular.js学习计划","Vue.js学习计划","HTTP协议权威教材","MySql数据库学习计划","Node.js教材学习","机器学习","大数据分析和挖掘"];
+    var lis = document.getElementsByClassName("container")[0].getElementsByTagName("li");
+    var show_details = document.getElementsByClassName("show-details")[0];
+
+    for( var x = 0 ; x < arr_months.length ; x++){
+    	show_details.innerHTML = arr_months [0] + "<br />"+arr_activity[0] ;
+    	lis[0].className  = "hover" ;
+    	lis[x].index = x;
+        lis[x].onclick = function (){
+        	for( var x = 0 ; x < arr_months.length ; x ++){
+                lis[x].className  = "" ;
+        	}
+        	lis[this.index].className  = "hover" ;
+        	show_details.innerHTML = arr_months[this.index] + "<br />" + arr_activity [this.index] ;
+        }
+    }
+    
+
+
+    //鼠标事件
+    //1、获取兼容的event事件
+    // document.onmousedown = function ( ev ){
+    //     var event = ev || window.event ;
+    //     console.info(event );
+    // }
+    
+
+    //2、阻止默认事件
+    // document.oncontextmenu = function(ev){
+    // 	var e = ev|| window.event ;
+    // 	if(e.preventDefault){
+    //         e.preventDefault();
+    // 	}else{
+    //         e.returnValue = false ; 
+    // 	};
+    // 	alert("禁止使用右键!");
+    // }
+
+
+    //3、获取键码
+    // document.onkeydown = function(ev){
+    //     var e = ev || window.event ;
+    //     alert(e.keyCode);
+    // }
+
+
+    //4、dom相关操作
+    // createElement();
+    // createTextNode();
+    // setAttribute();
+    // getAttribute();
+    // removeAttribute();
+    // appendChild();
+    // insertBefore();
+    // replaceChild();
+    // removeChild();
+
+
+    //5、探测js变量的作用范围
+
+	// var t = 'a'; //全局变量
+	// function test(){
+	// 	 alert(t); //并没有声明局部变量
+	// 	 var t = 'b';
+	// 	 alert(t);
+	// }
+	// test();
+
+
+	// var x = 10;
+	// function outer(){
+	// 	var x = 20;
+	// 		function inner(){
+	// 		      var x = 30;
+	// 		      alert(x);
+	// 		}
+	// 		inner();  //30
+	// 	alert(x); //20
+	// }
+	// outer(); //30,20 
+	// alert(x); //10
+</script>
+</html>
