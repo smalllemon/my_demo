@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录界面</title>
+	<style>
+ //这是一个融合了canvas特效的登录界面。
+	body {
+      font: 14px "Helvetica Neue", Helvetica, "PingFang SC", "微软雅黑", Tahoma, Arial, sans-serif;
+   }
+	.layui-canvs {
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    z-index: -1;
+	}
+	.layui-layout-login {
+	    width: 350px;
+	    height: auto;
+	    overflow: hidden;
+	    margin: 10% auto 0 auto;
+	    padding-left: 50px;
+	    padding-right: 50px;
+	    padding-top: 40px;
+	    padding-bottom: 20px;
+	    box-shadow: 0 -15px 30px #0d957a;
+	    border-radius: 5px;
+	    z-index: 1000;
+	}
+	.layui-layout-login h1 {
+	    font-size: 25px;
+	    font-weight: bold;
+	    text-align: center;
+	    color: #45bda6;
+	    text-shadow: 0 0 1px #0e947a;
+	    margin-bottom: 15px;
+	}
+	.layui-layout-login .larry-login {
+	    margin: 10px 0;
+	    height: 42px;
+	    overflow: hidden;
+	    position: relative;
+	}
+	.larry-login .login_txtbx {
+	    font-size: 14px;
+	    height: 26px;
+	    line-height: 26px;
+	    padding: 8px 5%;
+	    width: 90%;
+	    text-indent: 2em;
+	    border: none;
+	    background: #5cbdaa;
+	    color: white ;
+	}
+	.larry-login .login_txtbx {
+	    font-size: 14px;
+	    height: 26px;
+	    line-height: 26px;
+	    padding: 8px 5%;
+	    width: 90%;
+	    text-indent: 2em;
+	    border: none;
+	    background: #5cbdaa;
+	    color: white ;
+	}
+	.layui-layout-login .larry-login {
+	    margin: 10px 0;
+	    height: 42px;
+	    overflow: hidden;
+	    position: relative;
+	}
+	.layui-code-box {
+	    width: 100%;
+	    height: 42px;
+	    padding-top: 8px;
+	    padding-bottom: 8px;
+	    background: #5cbdaa;
+	    font-size: 14px;
+	    height: 26px;
+	    line-height: 26px;
+	}
+	.layui-layout-login .larry-login {
+	    margin: 10px 0;
+	    height: 42px;
+	    overflow: hidden;
+	    position: relative;
+	}
+	.layui-submit .submit_btn {
+	    width: 100%;
+	    height: 42px;
+	    border: none;
+	    font-size: 16px;
+	    background: #FF5722;
+	    color: #f8f8f8;
+	    cursor: pointer;
+	    font-family: "微软雅黑" ;
+	    font-size:15px;
+	}
+	.layui-login-text {
+	    margin: 10px 0;
+	    height: 60px;
+	    overflow: hidden;
+	    position: relative;
+	}
+	.layui-login-text p {
+	    color: #53c6b0;
+	    font-size: 14px;
+	    text-align: center;
+	    margin: 5px 0;
+	    font-family: "微软雅黑" ;
+	    font-size:15px;
+	} 
+	</style>
+</head>
+<body>
+	<div class="layui-canvs" style="width: 1910px; height: 901px;">
+	  <canvas id="canvas" width="1910" height="901" style="display: block; background: rgb(20, 20, 20);"></canvas>
+	</div>
+
+	<div class="layui-layout layui-layout-login">
+		<h1>
+			 <strong></strong><br />
+			 <em></em>
+		</h1>
+		<div class="layui-user-icon larry-login">
+			 <input type="text"  class="login_txtbx">
+		</div>
+		<div class="layui-pwd-icon larry-login">
+			 <input type="password"  class="login_txtbx">
+		</div>
+	    <div class="layui-val-icon larry-login">
+	    	<div class="layui-code-box">
+	    		<input type="text" id="code" name="code"  maxlength="4" class="login_txtbx">
+	    	</div>
+	    </div>
+	    <div class="layui-submit larry-login">
+	    	<input type="button" value="立即登陆" class="submit_btn">
+	    </div>
+	    <div class="layui-login-text">
+	    	<p></p>
+	        <p></p>
+	    </div>
+	</div>
+</body>
+<script type="text/javascript">
+	//全局变量
+    var initData = {
+        winWidth:"",
+        winHeight :"",
+        canvas:"",
+        context:"",  
+    };
+    // 全局函数
+    var gobalFunction = {
+    	init:function(){
+			gobalFunction.getmodelScope();
+			gobalFunction.setCanvas();
+    	},
+    	getmodelScope :function (){
+            if (window.innerWidth) {
+				initData.winWidth = window.innerWidth; 
+		    }else if ((document.body) && (document.body.clientWidth)) {
+				initData.winWidth = document.body.clientWidth; 
+				// 获取窗口高度 
+			}if (window.innerHeight) {
+				initData.winHeight = window.innerHeight; 
+			}else if ((document.body) && (document.body.clientHeight)) {
+				initData.winHeight = document.body.clientHeight; 
+				// 通过深入 Document 内部对 body 进行检测，获取窗口大小 
+			}if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth){ 
+				initData.winHeight = document.documentElement.clientHeight; 
+				initData.winWidth = document.documentElement.clientWidth; 
+			}  
+    	},
+    	setCanvas :function (){
+            initData.canvas = document.getElementById("canvas");
+		 	initData.context = initData.canvas.getContext("2d") ;
+		 	canvas.width = initData.winWidth;
+			canvas.height = initData.winHeight;
+			this.cw = canvas.width;
+			this.ch = canvas.height;
+			this.num = 200;
+			this.data = [];
+			for(var i = 0;i<this.num;i++){
+				this.data[i] = {
+					x:Math.random()*this.cw,
+					y:Math.random()*this.ch,
+					cX:Math.random()*0.6-0.3,
+					cY:Math.random()*0.6-0.3
+				}
+				this.drawCircle(this.data[i].x,this.data[i].y);
+			}
+        },
+		drawCircle: function(x,y){
+			var cxt = initData.context;
+			cxt.save();
+			cxt.fillStyle = "white";
+			cxt.beginPath();
+			cxt.arc(x,y,0.5,0,Math.PI*2,false);
+			cxt.closePath();
+			cxt.fill();
+			cxt.restore();
+		},
+        //绘制线条
+		drawLine: function(x1,y1,x2,y2){
+			var cxt =initData.canvas.getContext("2d") ;
+			var color = cxt.createLinearGradient(x1,y1,x2,y2);
+			color.addColorStop(0,"#fff");
+			color.addColorStop(0.5,"white");
+			color.addColorStop(1,"#333");
+			cxt.save();
+			cxt.strokeStyle = color;
+			cxt.beginPath();
+			cxt.moveTo(x1,y1);
+			cxt.lineTo(x2,y2);
+			cxt.closePath();
+			cxt.stroke();
+			cxt.restore();
+		},
+		moveCircle: function(){
+			initData.canvas.getContext("2d").clearRect(0,0,this.cw,this.ch);
+			for(var i = 0;i<this.num;i++){
+				this.data[i].x+=this.data[i].cX;
+				this.data[i].y+=this.data[i].cY;
+				//边界值判断
+				if(this.data[i].x>this.cw||this.data[i].x<0){
+					this.data[i].cX = -this.data[i].cX;
+				}
+				if(this.data[i].y>this.ch||this.data[i].y<0){
+					this.data[i].cY = -this.data[i].cY;
+				}
+				this.drawCircle(this.data[i].x,this.data[i].y);
+				//用勾股定理判断是否连线
+				for(var j = i+1;j<this.num;j++){//下一个点 i++
+					if((this.data[i].x-this.data[j].x)*(this.data[i].x-this.data[j].x)+
+					(this.data[i].y-this.data[j].y)*(this.data[i].y-this.data[j].y)<=50*50){
+						this.drawLine(this.data[i].x,this.data[i].y,this.data[j].x,this.data[j].y);
+					}
+				}
+			}
+		}
+    }
+
+    //函数调用
+    gobalFunction.init();
+	setInterval(function(){
+		gobalFunction.moveCircle();
+	},13);
+</script>
+</html>
