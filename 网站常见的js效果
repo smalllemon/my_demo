@@ -1,0 +1,65 @@
+//
+
+1、返回顶部
+$(function(){
+  $(".top").hide();
+  $(window).scrollTop(function(){
+     if($(window).scrollTop>100){
+       $(".top").fadeIn(200);
+     }else{
+       $(".top").fadeOut(200);
+     }
+  });
+  $(".top").click(function(){
+     $("html,body").animate({
+        scrollTop:"0px"
+     },800);
+  });
+})
+
+2、判断页面是否加载完成
+document.onreadystatechange = loadingchange();
+  function loadingchange(){
+    if(document.readychange==="complete"){
+         $("loading").hide();
+         window.location.href="http://www.baidu.com"
+    }
+}
+
+//首先页面会通过ajax去请求资源，当状态改变时，我们进行页面的加载并将loading页面进行隐藏。
+
+3、禁止鼠标右键
+$(document).ready(function(){
+    $(document).on("contextmeau",function(e){
+        var  e = e || window.event;
+        return false;
+    })
+})
+
+4、判断用户设备是电脑还是移动端？
+ function getClientInfo(){  
+         var banner=document.getElementById('banner');
+         var userAgentInfo = navigator.userAgent;  
+         var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");  
+         var agentinfo = null;  
+         for (var i = 0; i < Agents.length; i++) {  
+                   if (userAgentInfo.indexOf(Agents[i]) > 0) { 
+                   agentinfo = userAgentInfo; break;
+                  }  
+         }  
+         if(agentinfo){
+                   $('.banner').css('height','auto');
+                    banner.style.height='auto'
+                   }else{
+                        $('.banner').css($(window).height());
+                        banner.style.height=document.body.clientHeight
+                   }     
+        }
+        
+  5、返回上一页的操作相关代码
+    window.history.back(-1);
+    设置一个时间进行页面的跳转：
+    setTimeout(function(){
+       window.history.back(-1);
+    },300);
+        
