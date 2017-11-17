@@ -1,0 +1,46 @@
+$("#idname").click(function(){
+   var parent = $(this).parent(".menu_level");
+   $("#id_name").find("isclick").removeClass("isclick");
+   parent.addclass("isclick");
+   if(parent.hasClass("isclick")){
+      return false;
+   }
+   if(parent.hasClass("isopen")){
+     parent.removeClss("isOpen").children(".class_name").hide().end().children(".self").find(".fa-icon").removeClass("fa-minus-circle")..addClass('fa-plus-circle')
+   }else{
+     parent.addClass("isOpen").children(".class_name").show().end().children("self").find("fa-icon").removeClass("fa-minus-circle").addClass("fa-minus-circle")
+   }
+}).find("a").click(function(e){
+ var e = (e) ? e : ((window.event) ? window.event : null); 
+ window.event? window.event.cancelBubble = true : e.stopPropagation();
+  if($(this).hasClass("item-action-delete")){
+    var href= $(this).attr("href");
+    layer.confirm("客户提示信息？",function(){
+        layer.closeAll();
+        locaiton.href=href;
+    })
+    return false;
+  }
+});
+
+//获取event事件的兼容写法 
+ var e = (e) ? e : ((window.event) ? window.event : null); 
+ 
+//阻止冒泡事件的写法function stopBubble(ev) { 
+var e= ev || window.event ;
+if ( e && e.stopPropagation ) {
+    e.stopPropagation(); 
+}else {
+    window.event.cancelBubble = true; 
+}
+ window.event? window.event.cancelBubble = true : e.stopPropagation();
+
+//阻止默认事件的写法
+ function stopDefault( e ) { 
+    if ( e && e.preventDefault ) {
+        e.preventDefault(); 
+   } else {
+        window.event.returnValue = false; 
+        return false; 
+ }
+ window.event? window.event..returnValue = false : e.preventDefault();
