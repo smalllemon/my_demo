@@ -17,7 +17,7 @@ window.Vue= require('vue');
 //进入页面立即执行的函数
 $(function(){
 	window.getToken();
-	getUserList();
+	gobalFunction.window.getUserList();
 	$("#startDate").val("2015-01-01");
 	$("#endDate").val(gobalFunction.formatDate(globalNumber.endDate));
 	//复选框设置
@@ -27,7 +27,7 @@ $(function(){
 })
 //提示函数初始化
 $(window).load(function() { 
-	showTooltips();
+	gobalFunction.showTooltips();
 });
 
 //复选框
@@ -41,29 +41,29 @@ var checkboxTest = new Vue({
 $('input.checkbox-callback').on('ifChecked', function(event) {
 	var checkedStu=$('input[name=checkbox]:checked').map(function(){return this.value;}).get().join(',')
 	if(checkedStu.length==1){
-		companyStatus=checkedStu;
+		globalNumber.companyStatus=checkedStu;
 	}else{
-		companyStatus="";
+		globalNumber.companyStatus="";
 	}
-	$('#userTable').bootstrapTable("refresh",queryParams);
+	$('#userTable').bootstrapTable("refresh",gobalFunction.queryParams);
 });
 
 
 $('input.checkbox-callback').on('ifUnchecked', function(event) {
-	companyStatus=$('input[name=checkbox]:checked').map(function(){return this.value;}).get().join(',')
-	if(companyStatus.length==0){
-		companyStatus=3;
+	globalNumber.companyStatus=$('input[name=checkbox]:checked').map(function(){return this.value;}).get().join(',')
+	if(globalNumber.companyStatus.length==0){
+		globalNumber.companyStatus=3;
 		layer.msg("没有状态是不会有结果的~",{icon:2})
 	}
-	$('#userTable').bootstrapTable("refresh",queryParams);
+	$('#userTable').bootstrapTable("refresh",gobalFunction.queryParams);
 });
 
 
 //整个页面涉及的函数和变量名
 var globalNumber = {
-    globalurl:window.globalurl; //用来保存url的变量名
- 	companyStatus:"";
- 	endDate:new Date();
+    	globalurl:window.globalurl, //用来保存url的变量名
+ 	companyStatus:"",
+ 	endDate:new Date(),
 };
 
 var  gobalFunction  ={
@@ -91,7 +91,7 @@ var  gobalFunction  ={
 	//获取客户列表
 	window.getUserList:function(){
 	 	   var dataTables= $('#userTable').bootstrapTable({
-		  	method: 'get',
+		    method: 'get',
 		    url:globalNumber.globalurl+"/v1/companys",//数据源
 		    sidePagination: 'server',//设置为服务器端分页
 		    pagination: true, //是否分页
@@ -112,7 +112,7 @@ var  gobalFunction  ={
 		    	}
 		    	gobalFunction.showTooltips();
 		    },
-	        onLoadError: function(value){ //加载失败时执行 
+	           onLoadError: function(value){ //加载失败时执行 
 	        	  if(value.code==404){
 	    		       layer.msg("加载数据失败", {time : 1500, icon : 2}); 
 	    		   } 	
@@ -214,8 +214,8 @@ var  gobalFunction  ={
 			layer.msg(data.success,{icon:1});
 			$('#userTable').bootstrapTable("refresh",queryParams)
 		      }else if(data.code==400005){
-			window.getNewToken();
-			window.getToken();
+				window.getNewToken();
+				window.getToken();
 			}else{
 			  layer.msg(data.error,{icon:2})
 			}
