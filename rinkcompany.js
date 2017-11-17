@@ -257,8 +257,8 @@ var  rinkcompanyFunction ={
 	                ],
 		});
 	},
-   //表格数据获取的参数
-    queryParams:function (params) {
+  	 //表格数据获取的参数
+   	 queryParams:function (params) {
 	    return {
 	    	pageNumber:params.offset,
 	    	pageSize:params.limit,
@@ -321,6 +321,8 @@ var  rinkcompanyFunction ={
 		oReq.send(oData);
 	},
 };
+rinkcompanyFunction.init();
+
 
 //删除选中的子公司
 window.deleterinkcompany=function(value){
