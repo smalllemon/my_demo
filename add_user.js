@@ -10,7 +10,7 @@ window.Vue = require('vue');
 //初始化页面
 $(function(){
 	window.getToken();
-	getTradeList();
+	AddglobalFunction.getTradeList();
 })
 
 var  adduserglobal ={
