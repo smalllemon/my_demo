@@ -362,12 +362,12 @@ window.rinkaccountpageturn=function(_id){
 //编辑弹窗数据渲染 
 window.editrinkcompany=function(rinkcompanyglobal.DcompanyId){
 		rinkcompanyId=rinkcompanyglobal.DcompanyId;
-	  	$.ajax({
-		  url:rinkcompanyglobal.globalurl+'/v1/companys/'+rinkcompanyglobal.DcompanyId,
-		  type:'GET',
-		  dataType:'JSON',
-		  async:false,
-		  data:{
+	  	 $.ajax({
+		   url:rinkcompanyglobal.globalurl+'/v1/companys/'+rinkcompanyglobal.DcompanyId,
+		   type:'GET',
+		   dataType:'JSON',
+		   async:false,
+		   data:{
 			  access_token:window.accesstoken,
 		  },
 		  success:function(data){
