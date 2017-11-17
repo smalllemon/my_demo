@@ -195,4 +195,4 @@ $("#saveInfo").click(function(){
 				}
 			}
 		})
-})
+});
