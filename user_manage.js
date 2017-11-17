@@ -180,12 +180,12 @@ var  gobalFunction  ={
 		    return "<span data-toggle='tooltip' data-placement='top' title='客户编辑' style='color:#5A9F90;height:33px;line-height:33px;cursor: pointer;' class='fa fa-pencil-square-o' onclick=edit('"+value+"')></span><span  data-toggle='tooltip' data-placement='top' title='删除客户' style='color:#D9B793;margin-left:15px;cursor: pointer;' class='glyphicon glyphicon-trash' onclick=deleteCompany('"+value+"')></span>"
 	},
 	//状态列的格式化
-  statusFormatter:function(value,row,index){
-      if(value==1){
-        return "<font style='color:#5A9F90;'>有效</font>"
-      }else{
-        return "<font style='color:#D9B793;'>无效</font>"
-      }
+	 statusFormatter:function(value,row,index){
+	      if(value==1){
+		return "<font style='color:#5A9F90;'>有效</font>"
+	      }else{
+		return "<font style='color:#D9B793;'>无效</font>"
+	      }
 	},
 	//下级公司列的格式化
 	infoFormatter:function(value, row, index){
@@ -201,41 +201,41 @@ var  gobalFunction  ={
 	}
 	//点击删除按钮事件
 	window.deleteCompany:function(companyId){
-      layer.confirm('是否要删除此客户？', {
-          btn: ['确定','取消'] //按钮
-        },function(){
-          datanum="{'companyId':"+companyId+"}";
-          $.ajax({
-            url:globalNumber.globalurl+'/v1/companys/'+companyId+'?access_token='+window.accesstoken,
-            dataType: 'JSON',
-            type:'delete',
-            success: function(data) {
-              if(data.code==200){
-                layer.msg(data.success,{icon:1});
-                $('#userTable').bootstrapTable("refresh",queryParams)
-              }else if(data.code==400005){
-                window.getNewToken();
-                window.getToken();
-                }else{
-                  layer.msg(data.error,{icon:2})
-                }
-              }
-            });	
-        });
+	      layer.confirm('是否要删除此客户？', {
+		  btn: ['确定','取消'] //按钮
+		},function(){
+		  datanum="{'companyId':"+companyId+"}";
+		  $.ajax({
+		    url:globalNumber.globalurl+'/v1/companys/'+companyId+'?access_token='+window.accesstoken,
+		    dataType: 'JSON',
+		    type:'delete',
+		    success: function(data) {
+		      if(data.code==200){
+			layer.msg(data.success,{icon:1});
+			$('#userTable').bootstrapTable("refresh",queryParams)
+		      }else if(data.code==400005){
+			window.getNewToken();
+			window.getToken();
+			}else{
+			  layer.msg(data.error,{icon:2})
+			}
+		      }
+		    });	
+		});
 	},
 	//页面插件
 	window.FormElements : function() {
-      var runDatePicker = function() {
-        $('.date-picker').datepicker({
-          autoclose : true
-        });
-      };
-      return {
-        init : function() {
-          runDatePicker();
-        }
-      };
-    },
+	      var runDatePicker = function() {
+		$('.date-picker').datepicker({
+		  autoclose : true
+		});
+	      };
+	      return {
+		init : function() {
+		  runDatePicker();
+		}
+	      };
+	    },
 };
 gobalFunction.init();
 
