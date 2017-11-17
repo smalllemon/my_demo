@@ -266,15 +266,15 @@ $('#addUserInfo').click(function(){
 
 //点击编辑按钮事件
 window.edit = function(companyId){
-		    editCompany = layer.open({
-				type:2,
-				title:"编辑客户资料",
-				shadeClose:true,
-				skin:'title-class',
-				shade: [0.7, '#fff'],
-				area:['80%','95%'],
-				content:"/lanyue-manage/company/editCompany/"+companyId
-			})
+	    editCompany = layer.open({
+			type:2,
+			title:"编辑客户资料",
+			shadeClose:true,
+			skin:'title-class',
+			shade: [0.7, '#fff'],
+			area:['80%','95%'],
+			content:"/lanyue-manage/company/editCompany/"+companyId
+		})
 		   
 }
 layer.full(adduserinfo,editCompany); 
