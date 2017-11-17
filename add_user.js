@@ -194,5 +194,5 @@ $("#saveInfo").click(function(){
 					layer.msg(data.error,{icon:2})
 				}
 			}
-		})
+	})
 });
