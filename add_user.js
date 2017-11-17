@@ -27,7 +27,7 @@ var  adduserglobal ={
 					companyName:'',
 				}
 			}),//客户信息
-        tradeBox:new Vue({
+       		 tradeBox:new Vue({
 			el:'#tradeSel',
 			data:{
 				selected:'',
