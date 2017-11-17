@@ -138,7 +138,7 @@ var AddglobalFunction = {
 					window.getNewToken();
 					AddglobalFunction.getTradeList();
 				}else if(data.rows){
-					tradeBox.options=data.rows;
+					adduserglobal.tradeBox.options=data.rows;
 				}else{
 					layer.msg(data.error,{icon:2})
 				}
@@ -169,9 +169,9 @@ var AddglobalFunction = {
 $("#saveInfo").click(function(){
 	AddglobalFunction.uploadeImg();
 	var location={'lng':lng+'','lat':lat+''};
-	var newUser="{'companyName':'"+companyname.companyName+"','tradeId':"+tradeBox.selected+",'status':"+indexstatus+",'banner':'"+newbanner+"','logo':'"+newlogo+"','location':'"+JSON.stringify(location)+"','parentCode':''}"
+	var newUser="{'companyName':'"+adduserglobal.companyname.companyName+"','tradeId':"+adduserglobal.tradeBox.selected+",'status':"+adduserglobal.indexstatus+",'banner':'"+adduserglobal.newbanner+"','logo':'"+adduserglobal.newlogo+"','location':'"+JSON.stringify(adduserglobal.location)+"','parentCode':''}"
 	$.ajax({
-			url:globalurl+'/v1/companys',
+			url:adduserglobal.globalurl+'/v1/companys',
 			dataType : 'JSON',
 			type : 'POST',
 			data:{
