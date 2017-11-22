@@ -13,7 +13,7 @@ require("../../webapp/css/plugins/iCheck/custom.css");
 require("../../webapp/js/plugins/iCheck/icheck.min.js");
 
 //全局获取资源的url
-window.globalurl="http://139.129.235.9:8070/lanyue-api";
+window.globalurl="http://ip:端口号/lanyue-api";
 
 //全局保存项目名称
 window.itemName="/lanyue-manage";
