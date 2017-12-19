@@ -1,0 +1,46 @@
+
+常见的git命令操作
+
+1、	向远程仓库中添加东西
+
+     Git init : 初始化本地的文件
+ 
+     Git add .: 所有需要添加的东西
+
+     Git commit –m  “描述型信息” :  将上述东西添加至仓库
+
+     git remote add origin https://github.com/smalllemon/my_thoughts.git ：推送至远程长仓库
+     
+     git pull --rebase origin master ：远程库不为空必须做这一步
+     
+     git  status :   查看当前分支的操作状态
+     
+     git  log : 查看提交信息
+
+    
+2、	通过git操作分支和合并分支并解决冲突
+ 
+     git   branch -a：显示版本库中所有分支
+     
+     git   pull：拉取最新代码到本地
+
+     git   fetch：相当于是从远程获取最新版本到本地
+
+     git   fetch origin feature_shake:feature_shake： 从远程获取最新的版本到本地的分支上
+
+     git   checkout  branch2：切换到branch2分支
+
+     git   stash: 备份当前的工作区的内容
+
+     git   checkout  branch2：切换到branch2分支
+     
+     git   merge  master  : 将master分支和当前分支进行合并
+
+3、git 中针对远程仓库的操作：读  写  这两种常见的操作
+
+    写文件：向仓库中推送一些文件
+  
+    读：列  选  远程切 暂存 合并 (产生冲突：冲突的类型和解决方案)
+    
+    合并之后一定会产生冲突，首先要明确冲突产生的原因，根据冲突的类型，寻找合适的解决方案。
+
