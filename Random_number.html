@@ -75,18 +75,18 @@ var btn=document.getElementById('btn');
 		if(flag){
 			btn.innerHTML="停止随机";
 			flag=false;
-	    	time=setInterval(function(){
-	    		var x=Math.ceil(Math.random()*arr.length-1);
-		        li[x].style.backgroundColor="#431958"; 
-		        li[x].style.color="white"; 
-		        arr2.push(x);
-	    		for(var i=0;i<li.length;i++){
-		    		if(li[i]!=li[x]){
-	                 li[i].style.backgroundColor="";  
-	                 li[i].style.color="white";  
-	                }
-	    	    }      
-		    },200);
+			time=setInterval(function(){
+				var x=Math.ceil(Math.random()*arr.length-1);
+				li[x].style.backgroundColor="#431958"; 
+				li[x].style.color="white"; 
+				arr2.push(x);
+				for(var i=0;i<li.length;i++){
+					if(li[i]!=li[x]){
+				 li[i].style.backgroundColor="";  
+				 li[i].style.color="white";  
+				}
+			    }      
+			    },200);
 		    //选中设置其他的颜色
 		    // box.removeChild(li[arr2.pop()]);
 		    li[arr2.pop()].style.backgroundColor = "pink";
@@ -110,9 +110,9 @@ var btn=document.getElementById('btn');
 var initData = {
 	time : null,
 	flag : true,
-    saveNumber : [],
-    arrItem : ["邵乐乐","石美玲","李蓉","何欢",'陈明',"石美玲","张雪","李亚宁","王瑞","张阳","刘宁","刘露","崔展","刘歌",'韦秦康','雷欢欣','邵乐乐','张红红','李甫','都跳','王奇'],
-    boxContainer :document.getElementById('box'),
+        saveNumber : [],
+        arrItem : ["邵乐乐","石美玲","李蓉","何欢",'陈明',"石美玲","张雪","李亚宁","王瑞","张阳","刘宁","刘露","崔展","刘歌",'韦秦康','雷欢欣','邵乐乐','张红红','李甫','都跳','王奇'],
+        boxContainer :document.getElementById('box'),
 	liList : "",
 	randomNumber :"",
 	liElement : "",
@@ -124,35 +124,35 @@ var initData = {
 var  pageAction = {
 
 	init: function(){
-       pageAction.createElement();
-       pageAction.choseList();
+	       pageAction.createElement();
+	       pageAction.choseList();
 	},
-    createElement : function (){
+        createElement : function (){
 		for(var i = 0;i < initData.arrItem.length ;i++){
 	 		   initData.liList = document.createElement("li");
 			   initData.boxContainer.appendChild(initData.liList);
 			   initData.liList.setAttribute('class','show');
 			   initData.liList.innerHTML=initData.arrItem[i];
 		}
-    },
+      },
     choseList :function (){
     	initData.btnClick.onclick = function(){
 			if(initData.flag){
 				initData.btnClick.innerHTML="停止随机";
 				initData.flag = false;
-		    	initData.time = setInterval(function(){
-		    		initData.liElement = initData.boxContainer.getElementsByTagName('li');
-		    		initData.randomNumber = Math.ceil(Math.random()*initData.arrItem.length-1);
-			        initData.liElement[initData.randomNumber].style.backgroundColor="#431958"; 
-			        initData.liElement[initData.randomNumber].style.color="white"; 
-			        initData.saveNumber.push(initData.randomNumber);
-		    		for(var i = 0;i <initData.liElement.length;i++){
-			    		if(initData.liElement[i]!=initData.liElement[initData.randomNumber]){
-		                 initData.liElement[i].style.backgroundColor="";  
-		                 initData.liElement[i].style.color="white";  
-		                }
-		    	    }      
-			    },200);
+				initData.time = setInterval(function(){
+					initData.liElement = initData.boxContainer.getElementsByTagName('li');
+					initData.randomNumber = Math.ceil(Math.random()*initData.arrItem.length-1);
+					initData.liElement[initData.randomNumber].style.backgroundColor="#431958"; 
+					initData.liElement[initData.randomNumber].style.color="white"; 
+					initData.saveNumber.push(initData.randomNumber);
+					for(var i = 0;i <initData.liElement.length;i++){
+						if(initData.liElement[i]!=initData.liElement[initData.randomNumber]){
+						 initData.liElement[i].style.backgroundColor="";  
+						 initData.liElement[i].style.color="white";  
+					}
+				    }      
+				 },200);
 			    initData.boxContainer.removeChild(initData.liElement[initData.saveNumber.pop()]);
 		    }else if(initData.flag == false){
 		    	initData.btnClick.innerHTML="点击触发";
@@ -163,9 +163,9 @@ var  pageAction = {
     },
     preventThing:function(){
 		initData.btnClick.onmousedown=function(ev){
-		    initData.Element =ev||window.event;
+		    initData.Element = ev||window.event;
 		     if(initData.Element.preventDefault){
-				initData.Element.preventDefault();
+			initData.Element.preventDefault();
 		     }else{
 		     	initData.Element.returnValue=false;
 		     }
