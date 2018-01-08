@@ -1,0 +1,74 @@
+对h5的总结和学习主要从以下几个方面进行：
+
+1、H5产生的原因及H5的主要特性
+
+2、H5涉及到的技术有那些？
+
+3、H5的制作流程
+
+4、H5的应用场景
+
+
+1、h5产生的原因:新技术的产生是必然的趋势，其中最大的驱动力就是为了赢取客户，为了获得很高的市场占用额，为了经济利益这最大的目的。	
+
+2、H5的主要特性
+  
+  移除了部分元素、新增了API、新增了存储机制、新增了缓存机制、新增绘图功能。
+
+3、H5的制作流程
+ 
+    常见H5动画的制作流程：
+
+	   明确自己动画的应用场景   
+	   书写自己的文案 
+	   整合符合主题的素材 
+	   规划符合主题展现的动画交互模式
+
+4、 H5常见的应用场景
+
+    微信场景  活动运营型    品牌宣传型   产品介绍型  总结报告型
+
+5、 H5和原生app已经可以实现通过JS获取调用
+ 
+   （1）、 var last = Date.now(),
+		       doc = window.document,
+		       ifr = doc.createElement('iframe');
+
+          //创建一个隐藏的iframe
+          ifr.src = nativeUrl;
+          ifr.style.cssText = 'display:none;border:0;width:0;height:0;';
+          doc.body.appendChild(ifr);
+
+          setTimeout(function() {
+              doc.body.removeChild(ifr);
+              //setTimeout回小于2000一般为唤起失败 
+              if (Date.now() - last < 2000) {
+                  if (typeof onFail == 'function') {
+                      onFail();
+                  } else {
+                      //弹窗提示或下载处理等
+                  }
+              } else {
+                  if (typeof onSuccess == 'function') {
+                      onSuccess();
+                  }
+              }
+          }, 1000);
+
+	（2）、window.location.href 直接跳转
+
+			  window.location.href = nativeUrl;
+
+	 (3)、性能测试
+    
+		对比iframe唤起和location.href，我们可以发现：
+
+		对于ios来说，location.href跳转更合适，因为这种方式可以在Safari中成功唤起app。Safari作为iphone默认浏览器其重要性就不用多说了，而对于微信和qq客户端，ios中这两种方式都没有什么卵用==
+
+		对于Android来说，在进入页面直接唤起的情况下，iframe和location.href是一样的，但是如果是事件驱动的唤起，iframe唤起的表现比location.href要更好一点。
+
+		通过测试可以发现，进入页面直接唤起和事件驱动的唤起，对于很多浏览器，两者的表现是不同的，简单来说，直接唤起的失败更多。
+
+		通过上述对比分析，Android使用iframe唤起，ios采用window.location.href唤起更合适一点。
+
+
